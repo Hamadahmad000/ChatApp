@@ -13,6 +13,8 @@ import {useNavigation} from '@react-navigation/native';
 import AppImage from '../../components/AppImage/AppImage';
 import {useRoute} from '@react-navigation/native';
 import OtpInputs from 'react-native-otp-inputs';
+import action from '../../store/action';
+import {useSelector} from 'react-redux';
 
 const OtpVerification = () => {
   const [disabled, setdisabled] = useState(false);
@@ -24,17 +26,14 @@ const OtpVerification = () => {
         isoCode: 'PK',
         name: 'Pakistan',
       },
-      NUMBER: '3125567359',
     },
-    image:
-      '/Users/hamad/Library/Developer/CoreSimulator/Devices/16CD0248-0C17-44AA-99E4-646DC814FDA2/data/Containers/Data/Application/5BEE1DC8-F461-48C0-B568-974679C75241/tmp/react-native-image-crop-picker/B33E0C54-8920-44A3-B524-13EA5F9B637C.jpg',
-    name: 'Hamad',
   });
+  // const data = useSelector(state => console.log(state));
   const navigation = useNavigation();
 
   const route = useRoute();
   const {params} = route;
-  console.log(useData);
+
   useEffect(() => {
     setuseData(params.DATA);
   }, [route]);
@@ -54,13 +53,24 @@ const OtpVerification = () => {
   const handleScreenNavigate = () => {
     // navigation.navigate('OtpVerification');
   };
+  // Handling OTP Values and calling api
+  const otpHandling = async value => {
+    if (value.length >= 6) {
+      const OTPVerificationData = {
+        otp: value,
+        userID: useData.data._id,
+      };
+      await action.otpVerification(OTPVerificationData);
+    }
+  };
+
   return (
     <WrapperContainer
       flex={1}
       barColor={THEME_COLORS.white}
       containerStyle={styles.container}>
       <Header
-        centerText={`${useData.data.COUNTRYDATA.dialCode} ${useData.data.NUMBER}`}
+        centerText={useData.data.phone}
         rightDiabled={disabled}
         leftText={true}
         leftView={leftHeaderView}
@@ -86,7 +96,7 @@ const OtpVerification = () => {
       </AppText>
       <AppView paddingHorizontal={25}>
         <OtpInputs
-          handleChange={code => console.log(code)}
+          handleChange={otpHandling}
           numberOfInputs={6}
           placeholder="*"
           inputStyles={{

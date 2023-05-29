@@ -4,20 +4,16 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Auth from './Auth';
 import Main from './Main';
+import isLogin from '../helper/AuthHelper';
 const Stack = createNativeStackNavigator();
-const HomeScreen = () => {
-  return (
-    <View>
-      <Text>HomeScreen</Text>
-    </View>
-  );
-};
+
 const Navigation = () => {
+  const LoggedIn = isLogin();
+
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        {/* <Stack.Screen name="HomeScreen" component={HomeScreen} /> */}
-        {false ? Main(Stack) : Auth(Stack)}
+        {LoggedIn ? Main(Stack) : Auth(Stack)}
       </Stack.Navigator>
     </NavigationContainer>
   );

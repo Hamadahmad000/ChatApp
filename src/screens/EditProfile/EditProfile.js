@@ -1,5 +1,5 @@
-import {View, Text, TouchableOpacity, TextInput} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {TouchableOpacity, TextInput} from 'react-native';
+import React, {memo, useEffect, useState} from 'react';
 import WrapperContainer from '../../components/WrapperContainer/WrapperContainer';
 import Header from '../../components/Header/Header';
 import {THEME_COLORS} from '../../constant/Theme';
@@ -14,6 +14,8 @@ import RoundImage from '../../components/RoundImage/RoundImage';
 import ImagePicker from 'react-native-image-crop-picker';
 import {androidCameraPermission} from '../../utils/Permissions';
 import {useRoute} from '@react-navigation/native';
+import action from '../../store/action';
+import {SIGNUP_API} from '../../config/Axios';
 
 const EditProfile = () => {
   const [selectedImage, setselectedImage] = useState('');
@@ -30,7 +32,7 @@ const EditProfile = () => {
       [field]: value,
     }));
   };
-  console.log(state);
+  // console.log(state);
   const navigation = useNavigation();
   const route = useRoute();
   const {params} = route;
@@ -61,11 +63,43 @@ const EditProfile = () => {
       </AppView>
     );
   };
-  const handleScreenNavigate = () => {
-    navigation.navigate('OtpVerification', {
-      DATA: state,
-    });
-  };
+  // console.log(state.data.NUMBER);
+
+  const Done = async () => {
+    const Login_Code = state.data.COUNTRYDATA.dialCode.slice(1);
+
+    const POST_API_DATA = {
+      name: state.name,
+      phone: state.data.COUNTRYDATA.dialCode + state.data.NUMBER,
+      selectedCountry: state.data.COUNTRYDATA,
+    };
+    const LOGIN_API_DATA = {
+      phone: state.data.NUMBER,
+    };
+    if (
+      !state.image == '' ||
+      !state.image == null ||
+      !state.image == undefined
+    ) {
+      POST_API_DATA.profilePicture = state.image;
+    }
+    try {
+      const res = await action.signUp(POST_API_DATA, SIGNUP_API);
+      const LoginReqData = {
+        phone: `${Login_Code}${LOGIN_API_DATA.phone}`,
+      };
+
+      const loginres = await action.Login(LoginReqData);
+
+      if (loginres.success) {
+        navigation.navigate('OtpVerification', {
+          DATA: loginres,
+        });
+      }
+    } catch (error) {
+      console.log('Error raised in api calling ' + ' ' + error);
+    }
+  };  
   return (
     <WrapperContainer
       flex={1}
@@ -78,7 +112,7 @@ const EditProfile = () => {
         leftText={true}
         leftView={leftHeaderView}
         marginLeft={10}
-        onRightPress={handleScreenNavigate}
+        onRightPress={Done}
       />
       <HorizontalLine />
       <AppView
@@ -104,4 +138,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default memo(EditProfile);
