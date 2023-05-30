@@ -22,7 +22,7 @@ const TermsCondition = () => {
         width={150}
         marginTop={90}
       />
-      <AppView marginTop={170}>
+      <AppView marginTop={'30%'}>
         <AppText
           fontSize={'h2'}
           alignSelf={'center'}

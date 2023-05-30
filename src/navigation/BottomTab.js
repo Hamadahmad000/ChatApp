@@ -6,7 +6,7 @@ import iconPath from '../constant/iconPath';
 const Tab = createBottomTabNavigator();
 const BottomTab = () => {
   return (
-    <Tab.Navigator screenOptions={{headerShown: false}}>
+    <Tab.Navigator screenOptions={{headerShown: false}} initialRouteName="chat">
       <Tab.Screen
         name="Status"
         component={Screen.Status}
@@ -14,7 +14,7 @@ const BottomTab = () => {
           tabBarIcon: ({focused}) => {
             return (
               <Image
-                style={{tintColor: focused ? 'black' : 'gray'}}
+                style={{tintColor: focused ? 'blue' : 'gray'}}
                 source={iconPath.icCamera}
               />
             );
@@ -28,7 +28,7 @@ const BottomTab = () => {
           tabBarIcon: ({focused}) => {
             return (
               <Image
-                style={{tintColor: focused ? 'black' : 'gray'}}
+                style={{tintColor: focused ? 'blue' : 'gray'}}
                 source={iconPath.icCalls}
               />
             );
@@ -42,7 +42,7 @@ const BottomTab = () => {
           tabBarIcon: ({focused}) => {
             return (
               <Image
-                style={{tintColor: focused ? 'black' : 'gray'}}
+                style={{tintColor: focused ? 'blue' : 'gray'}}
                 source={iconPath.icCamera}
               />
             );
@@ -56,7 +56,7 @@ const BottomTab = () => {
           tabBarIcon: ({focused}) => {
             return (
               <Image
-                style={{tintColor: focused ? 'black' : 'gray'}}
+                style={{tintColor: focused ? 'blue' : 'gray'}}
                 source={iconPath.icChat}
               />
             );
@@ -70,7 +70,7 @@ const BottomTab = () => {
           tabBarIcon: ({focused}) => {
             return (
               <Image
-                style={{tintColor: focused ? 'black' : 'gray'}}
+                style={{tintColor: focused ? 'blue' : 'gray'}}
                 source={iconPath.icSetting}
               />
             );
@@ -82,3 +82,5 @@ const BottomTab = () => {
 };
 
 export default BottomTab;
+
+// Created By Hamad Mirza

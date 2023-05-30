@@ -1,12 +1,8 @@
 import {StyleSheet} from 'react-native';
+import {THEME_COLORS} from '../../constant/Theme';
 const styles = StyleSheet.create({
-  input: {
-    borderWidth: 0.3,
-    paddingVertical: 10,
-    width: '80%',
-    marginLeft: 10,
-    borderRadius: 5,
-    paddingHorizontal: 10,
+  container: {
+    backgroundColor: THEME_COLORS.white,
   },
 });
 

@@ -6,8 +6,11 @@ const Main = Stack => {
   return (
     <>
       <Stack.Screen name="BottomTab" component={BottomTab} />
+      <Stack.Screen name="Message" component={Screen.Message} />
     </>
   );
 };
 
 export default Main;
+
+// Created By Hamad Mirza

@@ -32,3 +32,5 @@ export const APP_FONT_SIZE = {
   xxLarge: 24,
   xxxLarge: 26,
 };
+
+// Created By Hamad Mirza

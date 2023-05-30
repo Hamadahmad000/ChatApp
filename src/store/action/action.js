@@ -1,7 +1,9 @@
 import {
   CallApi,
+  GETUSERS_API,
   LOGIN_API,
   OTP_API,
+  apiGet,
   apiPost,
   setItem,
 } from '../../config/Axios';
@@ -47,3 +49,15 @@ export const Login = async data => {
     console.log(error);
   }
 };
+
+// Get ALl users Action
+
+export const getAllUser = async (query = '') => {
+  try {
+    return apiGet(GETUSERS_API);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Created By Hamad Mirza

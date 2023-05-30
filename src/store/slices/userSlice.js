@@ -14,3 +14,5 @@ const userslice = createSlice({
 
 export const {saveUserData} = userslice.actions;
 export default userslice.reducer;
+
+// Created By Hamad Mirza

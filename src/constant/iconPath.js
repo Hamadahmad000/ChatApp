@@ -7,4 +7,11 @@ export default {
   icLogo: require('../assets/images/logo.png'),
   icForward: require('../assets/images/ic_forward.png'),
   icBack: require('../assets/images/ic_back.png'),
+  icEdit: require('../assets/images/ic_edit.png'),
+  icGroup: require('../assets/images/ic_group.png'),
+  icVideo: require('../assets/images/ic_video.png'),
+  icBackground: require('../assets/images/ic_lightbg.png'),
+  icAdd: require('../assets/images/ic_plus.png'),
 };
+
+// Created By Hamad Mirza

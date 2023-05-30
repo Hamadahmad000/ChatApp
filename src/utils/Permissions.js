@@ -31,3 +31,5 @@ export const androidCameraPermission = () =>
       return resolve(false);
     }
   });
+
+// Created By Hamad Mirza

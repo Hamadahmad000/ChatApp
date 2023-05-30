@@ -32,7 +32,6 @@ const EditProfile = () => {
       [field]: value,
     }));
   };
-  // console.log(state);
   const navigation = useNavigation();
   const route = useRoute();
   const {params} = route;
@@ -63,7 +62,6 @@ const EditProfile = () => {
       </AppView>
     );
   };
-  // console.log(state.data.NUMBER);
 
   const Done = async () => {
     const Login_Code = state.data.COUNTRYDATA.dialCode.slice(1);
@@ -99,7 +97,7 @@ const EditProfile = () => {
     } catch (error) {
       console.log('Error raised in api calling ' + ' ' + error);
     }
-  };  
+  };
   return (
     <WrapperContainer
       flex={1}
@@ -139,3 +137,5 @@ const EditProfile = () => {
 };
 
 export default memo(EditProfile);
+
+// Created By Hamad Mirza

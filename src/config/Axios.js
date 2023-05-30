@@ -120,3 +120,5 @@ export const CallApi = async (data, endPoint) => {
     console.log('Error Raised While Global Api Calling' + error);
   }
 };
+
+// Created By Hamad Mirza

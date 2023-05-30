@@ -11,8 +11,15 @@ const AppImage = ({
   marginBottom,
   marginLeft,
   marginRight,
+  backgroundColor,
+  borderRadius,
+  borderWidth,
+  padding,
+
+  dynamicImage = false,
 }) => {
   const customStyle = {};
+  let IType = dynamicImage == true ? {uri: source} : source;
   if (marginTop) customStyle.marginTop = marginTop;
   if (marginBottom) customStyle.marginBottom = marginBottom;
   if (marginLeft) customStyle.marginLeft = marginLeft;
@@ -20,7 +27,12 @@ const AppImage = ({
   if (height) customStyle.height = height;
   if (width) customStyle.width = width;
   if (alignSelf) customStyle.alignSelf = alignSelf;
-  return <Image source={source} style={customStyle} resizeMode={resizeMode} />;
+  if (backgroundColor) customStyle.backgroundColor = backgroundColor;
+  if (borderRadius) customStyle.borderRadius = borderRadius;
+  if (borderWidth) customStyle.borderWidth = borderWidth;
+  if (padding) customStyle.padding = padding;
+
+  return <Image source={IType} style={customStyle} resizeMode={resizeMode} />;
 };
 
 export default AppImage;

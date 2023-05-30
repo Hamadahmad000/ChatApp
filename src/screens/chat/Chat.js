@@ -1,47 +1,77 @@
-import {View, Text, TextInput, Button, Alert} from 'react-native';
-import React, {useCallback, useEffect, useState} from 'react';
+import {View, Text, FlatList, TouchableOpacity} from 'react-native';
+import React, {useCallback, useState} from 'react';
 import styles from './chatStyle';
-import {io} from 'socket.io-client';
-
+import WrapperContainer from '../../components/WrapperContainer/WrapperContainer';
+import {THEME_COLORS} from '../../constant/Theme';
+import Header from '../../components/Header/Header';
+import AppView from '../../components/AppView/AppView';
+import AppText from '../../components/AppText/AppText';
+import HorizontalLine from '../../components/HorizontalLine/HorizontalLine';
+import AppImage from '../../components/AppImage/AppImage';
+import iconPath from '../../constant/iconPath';
+import {useNavigation} from '@react-navigation/native';
 const Chat = () => {
-  const [message, setmessage] = useState('');
-  const [data, setdata] = useState([]);
-  const socket = io('http://localhost:8000');
-
-  useEffect(() => {
-    socket.on('connect', () => {
-      socket.emit('client', 'Hi From Client side socket');
-    });
-  }, []);
-  const handelMessageSent = () => {
-    if (message) {
-      socket.emit('send', message);
-    }
+  const [data, setdata] = useState('');
+  const navigation = useNavigation();
+  const ViewAllLog = () => {
+    navigation.navigate('Users');
   };
-  useEffect(() => {
-    socket.on('receive', data => {
-      setdata(predata => [...predata, data]);
-      console.log(data);
-    });
-  }, []);
-  console.log(data);
+  const leftHeaderView = () => {
+    return (
+      <TouchableOpacity>
+        {data.length > 0 ? <AppText fontSize={17}>Edit</AppText> : <AppView />}
+      </TouchableOpacity>
+    );
+  };
+  const renderRecentChats = useCallback(() => {
+    return (
+      <AppView>
+        <AppText>Hello</AppText>
+      </AppView>
+    );
+  }, [data]);
+
+  // Component for When recents Chats is emplty
+  const emptyRecentChat = () => {
+    return (
+      <AppView paddingHorizontal={25}>
+        <AppText alignItems={'center'} marginTop={'60%'} fontSize={'h3'}>
+          Tap on <AppImage source={iconPath.icEdit} /> in the top right corner
+          to start a new chat
+        </AppText>
+        <AppText marginTop={20}>
+          You will chat with contact who will installed and signup chatbes on
+          their phone
+        </AppText>
+      </AppView>
+    );
+  };
   return (
-    <View style={{flex: 1}}>
-      <View style={{flexDirection: 'row', position: 'absolute', bottom: 10}}>
-        <TextInput
-          style={styles.input}
-          value={message}
-          onChangeText={text => setmessage(text)}
-        />
-        <Button title="Send" onPress={handelMessageSent} />
-      </View>
-      <View style={{paddingHorizontal: 10, paddingTop: 10}}>
-        {data.map((item, index) => {
-          return <Text key={index}>{item}</Text>;
-        })}
-      </View>
-    </View>
+    <WrapperContainer
+      flex={1}
+      barColor={THEME_COLORS.white}
+      containerStyle={styles.container}>
+      <Header
+        centerText={''}
+        rightText={'Done'}
+        rightDiabled={true}
+        leftText={true}
+        leftView={leftHeaderView}
+        marginLeft={10}
+        onRightPress={ViewAllLog}
+        rightImage={iconPath.icEdit}
+      />
+      <HorizontalLine />
+
+      <FlatList
+        data={data}
+        renderItem={renderRecentChats}
+        ListEmptyComponent={emptyRecentChat}
+      />
+    </WrapperContainer>
   );
 };
 
 export default Chat;
+
+// Created By Hamad Mirza

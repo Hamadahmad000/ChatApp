@@ -6,3 +6,5 @@ const rootReducer = combineReducers({
 });
 
 export default rootReducer;
+
+// Created By Hamad Mirza

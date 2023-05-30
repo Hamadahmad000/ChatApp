@@ -1,8 +1,10 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import AppView from '../AppView/AppView';
 import AppText from '../AppText/AppText';
 import {THEME_COLORS} from '../../constant/Theme';
+import AppImage from '../AppImage/AppImage';
+import iconPath from '../../constant/iconPath';
 
 const Header = ({
   centerText,
@@ -13,6 +15,7 @@ const Header = ({
   rightDiabled,
   marginLeft,
   marginRight,
+  rightImage,
 }) => {
   return (
     <AppView
@@ -33,14 +36,18 @@ const Header = ({
         activeOpacity={0.5}
         onPress={onRightPress}
         disabled={!rightDiabled}>
-        <AppText
-          fontSize={15}
-          color={rightDiabled ? THEME_COLORS.navyBlue : THEME_COLORS.gray}>
-          {rightText}
-        </AppText>
+        {rightImage ? (
+          <AppImage source={rightImage} />
+        ) : (
+          <AppText
+            fontSize={15}
+            color={rightDiabled ? THEME_COLORS.navyBlue : THEME_COLORS.gray}>
+            {rightText}
+          </AppText>
+        )}
       </TouchableOpacity>
     </AppView>
   );
 };
 
-export default Header;
+export default memo(Header);

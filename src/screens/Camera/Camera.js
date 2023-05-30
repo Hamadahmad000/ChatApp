@@ -10,3 +10,5 @@ const Camera = () => {
 };
 
 export default Camera;
+
+// Created By Hamad Mirza

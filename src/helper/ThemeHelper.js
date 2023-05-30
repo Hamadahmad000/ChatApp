@@ -14,3 +14,5 @@ export function hexToRgbA(hex, opacity) {
   }
   throw new Error(`Bad Hex ${hex} with ${opacity}`);
 }
+
+// Created By Hamad Mirza

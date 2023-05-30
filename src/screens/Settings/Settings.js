@@ -10,3 +10,5 @@ const Settings = () => {
 };
 
 export default Settings;
+
+// Created By Hamad Mirza

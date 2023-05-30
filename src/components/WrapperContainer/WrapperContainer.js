@@ -1,5 +1,5 @@
 import {View, Text, SafeAreaView, StatusBar} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import {THEME_COLORS} from '../../constant/Theme';
 import styles from './style';
 
@@ -16,9 +16,9 @@ const WrapperContainer = ({
     <View
       style={[styles.WrapperContainer, containerStyle, customContainerStyle]}>
       <StatusBar backgroundColor={barColor} barStyle={barContent} />
-      <SafeAreaView>{children}</SafeAreaView>
+      <SafeAreaView style={{flex: 1}}>{children}</SafeAreaView>
     </View>
   );
 };
 
-export default WrapperContainer;
+export default memo(WrapperContainer);

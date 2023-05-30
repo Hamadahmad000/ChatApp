@@ -26,6 +26,7 @@ const AppText = ({
   paddingHorizontal,
   paddingVertical,
   onPress,
+  alignItems,
 }) => {
   const customStyle = {};
   if (marginTop) customStyle.marginTop = marginTop;
@@ -46,7 +47,8 @@ const AppText = ({
   if (paddingHorizontal) customStyle.paddingHorizontal = paddingHorizontal;
   if (paddingVertical) customStyle.paddingVertical = paddingVertical;
   if (color) customStyle.color = color;
-  if (style) customStyle.style = style;
+
+  if (alignItems) customStyle.alignItems = alignItems;
   if (fontSize) {
     let size = '';
     if (typeof fontSize == 'string') {
@@ -60,7 +62,14 @@ const AppText = ({
     customStyle.fontSize = size;
   }
   return (
-    <Text onPress={onPress || onPress} style={[customStyle]}>
+    <Text
+      onPress={onPress || onPress}
+      style={[
+        {
+          ...style,
+        },
+        customStyle,
+      ]}>
       {children}
     </Text>
   );
